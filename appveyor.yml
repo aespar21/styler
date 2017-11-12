@@ -16,17 +16,28 @@ install:
 cache:
 - C:\RLibrary
 
-before_build: R -q -e "tic::before_install()"
-build_script: R -q -e "tic::install()"
-after_build: R -q -e "tic::after_install()"
-before_test: R -q -e "tic::before_script()"
-test_script: R -q -e "tic::script()"
-on_success: R -q -e "try(tic::after_success(), silent = TRUE)"
-on_failure: R -q -e "tic::after_failure()"
-before_deploy: R -q -e "tic::before_deploy()"
-deploy_script: R -q -e "tic::deploy()"
-after_deploy: R -q -e "tic::after_deploy()"
-on_finish: R -q -e "tic::after_script()"
+before_build:
+- cmd: R -q -e "tic::before_install()"
+build_script:
+- cmd: R -q -e "tic::install()"
+after_build:
+- cmd: R -q -e "tic::after_install()"
+before_test:
+- cmd: R -q -e "tic::before_script()"
+test_script:
+- cmd: R -q -e "tic::script()"
+on_success:
+- cmd: R -q -e "try(tic::after_success(), silent = TRUE)"
+on_failure:
+- cmd: R -q -e "tic::after_failure()"
+before_deploy:
+- cmd: R -q -e "tic::before_deploy()"
+deploy_script:
+- cmd: R -q -e "tic::deploy()"
+after_deploy:
+- cmd: R -q -e "tic::after_deploy()"
+on_finish:
+- cmd: R -q -e "tic::after_script()"
 
 # Adapt as necessary starting from here
 
