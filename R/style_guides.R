@@ -288,11 +288,6 @@ character_to_ordered <- function(x, levels, name = substitute(x)) {
 #'   math_token_spacing = specify_math_token_spacing(zero = "'+'"),
 #'   strict = TRUE
 #' )
-#' style_text(
-#'   "1+1   -3",
-#'   math_token_spacing = tidyverse_math_token_spacing(),
-#'   strict = TRUE
-#' )
 #' @name math_token_spacing
 NULL
 
@@ -300,8 +295,8 @@ NULL
 #'   spacing.
 #' @export
 specify_math_token_spacing <-
-  function(zero = NULL,
-           one = c("'+'", "'-'", "'*'", "'/'", "'^'")) {
+  function(zero = "'^'",
+           one = c("'+'", "'-'", "'*'", "'/'")) {
     assert_tokens(c(one, zero))
     lst(
       one = setdiff(c(math_token, one), zero),
@@ -316,9 +311,17 @@ specify_math_token_spacing <-
 #' style_text(
 #'   "1+1   -3",
 #'   math_token_spacing = tidyverse_math_token_spacing(),
+#'   strict = FALSE
+#' )
+#' style_text(
+#'   "1+1   -3",
+#'   math_token_spacing = tidyverse_math_token_spacing(),
 #'   strict = TRUE
 #' )
 #' @export
 tidyverse_math_token_spacing <- function() {
-  specify_math_token_spacing(one = math_token_lo)
+  specify_math_token_spacing(
+    zero = "'^'",
+    one = c("'+'", "'-'", "'*'", "'/'")
+  )
 }
